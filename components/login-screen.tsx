@@ -49,7 +49,7 @@ export function LoginScreen({ nextPath, showHint }: { nextPath: string; showHint
   return (
     <main className="grid min-h-screen lg:grid-cols-2">
       <section className="relative hidden overflow-hidden bg-primary text-primary-foreground lg:flex lg:flex-col lg:justify-between lg:p-12">
-        <Mark className="text-primary-foreground [&_span]:text-primary-foreground" />
+        <Mark inverse className="text-primary-foreground [&_span]:text-primary-foreground" />
         <div>
           <p className="font-heading text-5xl leading-tight font-medium text-balance">
             Die Akte, die Unterschrift und der nächste Termin an einem Ort.

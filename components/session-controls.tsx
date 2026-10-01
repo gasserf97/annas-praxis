@@ -114,18 +114,20 @@ export function NewSessionDialog({
 }) {
   const [open, setOpen] = useState(Boolean(defaults?.date));
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <>
       <Button type="button" className="h-10" onClick={() => setOpen(true)}>
         Sitzung hinzufügen
       </Button>
-      <DialogContent className="sm:max-w-lg">
-        <DialogHeader>
-          <DialogTitle>Neue Sitzung</DialogTitle>
-          <DialogDescription>Der Kommentar bleibt in der Kachel und lässt sich später aufklappen.</DialogDescription>
-        </DialogHeader>
-        <SessionFields clientId={clientId} defaults={defaults} />
-      </DialogContent>
-    </Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Neue Sitzung</DialogTitle>
+            <DialogDescription>Der Kommentar bleibt in der Kachel und lässt sich später aufklappen.</DialogDescription>
+          </DialogHeader>
+          <SessionFields clientId={clientId} defaults={defaults} />
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
 
