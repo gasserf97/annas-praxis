@@ -19,7 +19,7 @@ Die Praxis ist dann unter [http://127.0.0.1:43123](http://127.0.0.1:43123) errei
 
 Das lokale Passwort steht in `.env` als `PRACTICE_PASSWORD` und ist in der Vorlage `praxis`. Kundinnen und Kunden melden sich nicht an. Sie öffnen den persönlichen Link unter `/einwilligung/…`, den Anna aus der Akte kopiert.
 
-`npm run db:setup` legt Beispieldaten an: sechs Kunden, Sitzungen, Termine in der aktuellen Woche und ein paar bereits unterschriebene Einwilligungen. Ein erneuter Aufruf ersetzt diese Daten.
+`npm run db:setup` legt Beispieldaten an: sechs Kunden mit Gesprächsnotizen, Termine in der aktuellen Woche und ein paar bereits unterschriebene Einwilligungen. Ein erneuter Aufruf ersetzt diese Daten. Startet die Praxis mit leerer Datenbank (auch auf Render), werden dieselben Beispiele automatisch angelegt.
 
 ## Was die Praxis kann
 

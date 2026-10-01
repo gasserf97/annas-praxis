@@ -26,4 +26,5 @@ function run(command, args) {
 const port = process.env.PORT || "43123";
 
 await run("npx", ["prisma", "db", "push", "--skip-generate"]);
+await run("npx", ["tsx", "prisma/seed.ts", "--if-empty"]);
 await run("npx", ["next", "start", "-H", "0.0.0.0", "-p", port]);
