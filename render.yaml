@@ -1,0 +1,25 @@
+# Annas Praxis auf Render
+# Im Dashboard: New → Blueprint → dieses Repository verbinden.
+# Die Festplatte hält die SQLite-Datei. Dafür ist ein einzelner Web-Service nötig.
+services:
+  - type: web
+    name: annas-praxis
+    runtime: node
+    plan: starter
+    region: frankfurt
+    buildCommand: npm ci && npx prisma generate && npm run build
+    startCommand: node scripts/start.mjs
+    healthCheckPath: /anmelden
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_URL
+        value: file:/var/data/annas-praxis.db
+      - key: PRACTICE_PASSWORD
+        generateValue: true
+      - key: SESSION_SECRET
+        generateValue: true
+    disk:
+      name: praxis-data
+      mountPath: /var/data
+      sizeGB: 1

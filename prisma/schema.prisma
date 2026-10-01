@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id           String        @id @default(cuid())
+  firstName    String
+  lastName     String
+  email        String        @default("")
+  phone        String        @default("")
+  dateOfBirth  String        @default("")
+  street       String        @default("")
+  postalCode   String        @default("")
+  city         String        @default("")
+  heightCm     Int?
+  weightKg     Float?
+  diet         String        @default("")
+  allergies    String        @default("[]")
+  intolerances String        @default("[]")
+  goals        String        @default("[]")
+  goalNotes    String        @default("")
+  medications  String        @default("")
+  notes        String        @default("")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  sessions     Session[]
+  appointments Appointment[]
+  consent      Consent?
+}
+
+model Consent {
+  id              String    @id @default(cuid())
+  clientId        String    @unique
+  client          Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  token           String    @unique
+  status          String    @default("pending")
+  signerName      String    @default("")
+  signatureData   String    @default("")
+  signedAt        DateTime?
+  signerIp        String    @default("")
+  signerAgent     String    @default("")
+  documentVersion String    @default("1.0")
+  createdAt       DateTime  @default(now())
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  date      DateTime
+  title     String
+  kind      String   @default("Folgetermin")
+  comment   String   @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([clientId, date])
+}
+
+model Appointment {
+  id        String   @id @default(cuid())
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  startsAt  DateTime
+  endsAt    DateTime
+  title     String
+  notes     String   @default("")
+  location  String   @default("Praxis")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([startsAt])
+}
